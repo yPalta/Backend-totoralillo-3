@@ -7,7 +7,7 @@ import { SemesterPlan } from './dto/create-manual-simulation.dto';
 export class SimulationController {
   constructor(private readonly simulationService: SimulationService) {}
 
-  // Tarea 1: Implementar simulación de inscripción manual
+ 
   @Post('manual')
   async createManualSimulation(@Body() dto: CreateManualSimulationDto): Promise<{
     estimatedGraduation: string;
@@ -16,7 +16,7 @@ export class SimulationController {
     approvedCourses: string[];
     pendingCourses: never[];
   }> {
-    // El DTO ya fue validado por el ValidationPipe global
+    
     return this.simulationService.generateManualProjection(dto);
   }
 }

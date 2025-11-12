@@ -4,9 +4,9 @@ import { CurriculumService } from './curriculum.service';
 import { ExternalApiModule } from '../external-api/external-api.module';
 
 @Module({
-  imports: [ExternalApiModule], // Importa el módulo que provee ExternalApiService
+  imports: [ExternalApiModule], 
   controllers: [CurriculumController],
   providers: [CurriculumService],
-  exports: [CurriculumService], // Exporta para que se use la  Simulación y Optimización 
+  exports: [CurriculumService], 
 })
 export class CurriculumModule {}

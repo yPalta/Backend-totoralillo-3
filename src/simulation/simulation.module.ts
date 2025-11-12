@@ -5,7 +5,7 @@ import { ProgressModule } from '../progress/progress.module';
 import { CurriculumModule } from '../curriculum/curriculum.module';
 
 @Module({
-  imports: [ProgressModule, CurriculumModule], // Necesita ambos
+  imports: [ProgressModule, CurriculumModule], 
   controllers: [SimulationController],
   providers: [SimulationService],
 })

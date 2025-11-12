@@ -33,11 +33,11 @@ export class SimulationService {
         throw new BadRequestException(`Error en ${semester.period} ${semester.year}: ${validationResult.error}`);
       }
 
-      //si se valido, agregar los cursos al conjunto de aprobados
+      
       semester.courses.forEach(code => simulatedApproved.add(code));
       totalCreditsPerSemester.push({
         semester: `${semester.period}-${semester.year}`,
-        credits: validationResult.semesterCredits, // Tarea 3
+        credits: validationResult.semesterCredits, 
       });
     }
 
@@ -45,7 +45,7 @@ export class SimulationService {
 
     const futurePlan = this.calculateRemainingPlan(curriculum, simulatedApproved, dto.maxCreditsPerSemester);
 
-    //Mostrar impacto en fecha estimada de egreso
+    
     const fullPlan = [...dto.manualPlan, ...futurePlan.plan];
     const estimatedGraduation = fullPlan.length > 0 ? 
       `${fullPlan[fullPlan.length - 1].period} ${fullPlan[fullPlan.length - 1].year}` :
@@ -55,7 +55,7 @@ export class SimulationService {
       estimatedGraduation,
       totalCreditsPerSemester, 
       fullPlan, 
-      //Mostrar aprobados y pendientes (en el contexto de la simulacion)
+     
       approvedCourses: Array.from(simulatedApproved),
       pendingCourses: futurePlan.pending,
     };
@@ -78,14 +78,14 @@ export class SimulationService {
         return { isValid: false, error: `Ramo ${courseCode} no existe.`, semesterCredits: 0 };
       }
 
-      //Restricción ramos adelantados (Prerrequisitos)
+      
       for (const preCode of course.prerequisites) {
         if (!approvedSoFar.has(preCode)) {
           return { isValid: false, error: `Falta prerrequisito ${preCode} para ${courseCode}.`, semesterCredits: 0 };
         }
       }
       
-      //Ramos Invierno/Verano
+      
       if (semester.period === 'I' || semester.period === 'V') {
         if (!failedSoFar.has(courseCode)) {
           return { isValid: false, error: `Ramo ${courseCode} solo se puede tomar en I/V si fue reprobado.`, semesterCredits: 0 };
@@ -95,7 +95,7 @@ export class SimulationService {
       semesterCredits += course.credits;
     }
 
-    //Restricción créditos máximos
+   
     if (semesterCredits > maxCredits) {
       return { isValid: false, error: `Excede el máximo de créditos (${semesterCredits} > ${maxCredits}).`, semesterCredits };
     }
@@ -105,7 +105,7 @@ export class SimulationService {
 
  
   private calculateRemainingPlan(curriculum: Curriculum, approved: Set<string>, maxCredits: number) {
-    //Implementar lógica de optimización aqui
+    //Implementar lógica de optimización aqui(pendiente)
     
     console.warn('calculateRemainingPlan no implementado');
     return { plan: [], pending: [] };

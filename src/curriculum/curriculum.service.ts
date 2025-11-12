@@ -35,7 +35,7 @@ export class CurriculumService {
     }
 
     try {
-      const apiCourses = await this.externalApiService.fetchCurriculumFromAPI(careerCode);
+      const apiCourses: Course[] = this.externalApiService.fetchCurriculumFromAPI(careerCode) as unknown as Course[];
       
       const courseMap = new Map<string, Course>();
       apiCourses.forEach(course => {
